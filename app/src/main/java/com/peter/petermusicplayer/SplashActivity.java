@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.peter.petermusicplayer.databinding.ActivitySplashBinding;
-import com.peter.petermusicplayer.view.MainActivity;
+import com.peter.petermusicplayer.view.MusicPlayActivity;
 
 public class SplashActivity extends Activity {
 
@@ -29,7 +28,7 @@ public class SplashActivity extends Activity {
     private class splashHandler implements Runnable{
         @Override
         public void run() {
-            Intent intent = new Intent(getApplication(), MainActivity.class);
+            Intent intent = new Intent(getApplication(), MusicPlayActivity.class);
             startActivity(intent);
             finish();
         }
