@@ -11,45 +11,57 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MainActivity">
-        <TextView
-            android:id="@+id/musicTitle"
+        tools:context=".view.MainActivity"
+        android:background="@color/black">
+        <LinearLayout
+            android:id="@+id/musicInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/albumName"
-            app:layout_constraintBottom_toTopOf="@+id/signer"
-            tools:text="너의 의미"/>
-        <TextView
-            android:id="@+id/albumName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/musicTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/signer"
-            tools:text="꽃갈피"/>
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <TextView
+                android:id="@+id/musicTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="너의 의미"
+                android:textColor="@color/music_info"/>
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/albumName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="꽃갈피"
+                android:textColor="@color/music_info"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/signer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/musicTitle"
+            app:layout_constraintTop_toBottomOf="@+id/musicInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/songImage"
-            tools:text="아이유(IU)"/>
+            tools:text="아이유(IU)"
+            android:textColor="@color/music_info"/>
 
         <ImageView
             android:id="@+id/songImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             app:layout_constraintTop_toBottomOf="@+id/signer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/lyrics"
-            tools:background="@drawable/ic_launcher_background"/>
+            tools:background="@drawable/iu_album"/>
 
         <TextView
             android:id="@+id/lyrics"
@@ -59,16 +71,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="너의 그 한 마디 말도 그 웃음도 \n나에겐 커다란 의미"
+            android:textColor="@color/lyrics_black"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/songSeekBar"/>
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/songSeekBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="5dp"
             app:layout_constraintTop_toBottomOf="@+id/lyrics"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toTopOf="@+id/Buttons"/>
+
+        <LinearLayout
+            android:id="@+id/Buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/songSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/playButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_baseline_play_arrow_24"/>
+
+        </LinearLayout>
+
 
 
 
