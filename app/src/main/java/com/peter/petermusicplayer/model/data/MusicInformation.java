@@ -85,6 +85,13 @@ public class MusicInformation {
     @NonNull
     @Override
     public String toString() {
-        return singer+""+album+""+title+""+duration+""+image+""+file+""+lyrics;
+        return "받은데이터들{"+"\n"+
+                "singer="+singer+"\n"+
+                "album="+album+"\n"+
+                "title="+title+"\n"+
+                "duration="+duration+"\n"+
+                "image="+image+"\n"+
+                "file="+file+"\n"+
+                "lyrics="+lyrics+"\n"+"}";
     }
 }
