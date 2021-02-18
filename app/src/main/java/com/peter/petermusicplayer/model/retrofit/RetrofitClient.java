@@ -1,5 +1,8 @@
 package com.peter.petermusicplayer.model.retrofit;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.peter.petermusicplayer.model.data.MusicInformation;
 
 
@@ -10,25 +13,30 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
+    MusicInformation musicInformation;
+    Retrofit retrofit;
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    public RetrofitClient(){
+        initRetrofit();
+    }
 
-    public APIService apiService = retrofit.create(APIService.class);
+    public void initRetrofit(){
 
-    public Call<MusicInformation> call = apiService.getPost("song.json");
-
-    public MusicInformation getMusic(){
-        final MusicInformation[] musicInformation = new MusicInformation[1];
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        APIService apiService = retrofit.create(APIService.class);
+        Call<MusicInformation> call = apiService.getPost("song.json");
 
         call.enqueue(new Callback<MusicInformation>() {
             @Override
             public void onResponse(Call<MusicInformation> call, Response<MusicInformation> response) {
                 if (response.isSuccessful()){
-                    musicInformation[0] = response.body();
-                    System.out.printf(musicInformation[0].toString());
+                    System.out.println("연결성공");
+                    musicInformation = response.body();
+                    setMusicInformation();
+                    System.out.println("musicInformation 데이터가 들어가지나"+musicInformation);
                 }
             }
             @Override
@@ -37,7 +45,10 @@ public class RetrofitClient {
                 t.printStackTrace();
             }
         });
-        return musicInformation[0];
+
     }
 
+    public MusicInformation setMusicInformation(){
+        return musicInformation;
+    }
 }

@@ -94,4 +94,14 @@ public class MusicInformation {
                 "file="+file+"\n"+
                 "lyrics="+lyrics+"\n"+"}";
     }
+
+    public MusicInformation(String singer, String album, String title, int duration, String image, String file, String lyrics) {
+        this.singer = singer;
+        this.album = album;
+        this.title = title;
+        this.duration = duration;
+        this.image = image;
+        this.file = file;
+        this.lyrics = lyrics;
+    }
 }

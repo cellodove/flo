@@ -5,9 +5,12 @@ import com.peter.petermusicplayer.model.retrofit.RetrofitClient;
 
 public class Repository {
     private static Repository instance;
-    public Repository(){}
+
+    public Repository(){
+    }
 
     public static Repository getInstance(){
+        System.out.println("Repository getInstance 동작");
         if (instance == null){
             instance = new Repository();
         }
@@ -16,6 +19,7 @@ public class Repository {
 
     public MusicInformation getMusic(){
         RetrofitClient retrofitClient = new RetrofitClient();
-        return retrofitClient.getMusic();
+        System.out.println("레포지토리 동작하나");
+        return retrofitClient.setMusicInformation();
     }
 }
