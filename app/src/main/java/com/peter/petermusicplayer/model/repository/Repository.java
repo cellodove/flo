@@ -20,6 +20,6 @@ public class Repository {
     public MusicInformation getMusic(){
         RetrofitClient retrofitClient = new RetrofitClient();
         System.out.println("레포지토리 동작하나");
-        return retrofitClient.setMusicInformation();
+        return retrofitClient.getMusic();
     }
 }

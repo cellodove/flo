@@ -22,7 +22,5 @@ public class MusicPlayActivity extends Activity {
         musicPlayViewModel = new MusicPlayViewModel();
         musicPlayViewModel.getMusicInformation();
         System.out.println("액티비티까지 데이터가 들어와지는가 노래제목:"+musicPlayViewModel.getMusicInformation());
-
-
     }
 }

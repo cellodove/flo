@@ -35,7 +35,7 @@ public class RetrofitClient {
                 if (response.isSuccessful()){
                     System.out.println("연결성공");
                     musicInformation = response.body();
-                    setMusicInformation();
+                    getMusic();
                     System.out.println("musicInformation 데이터가 들어가지나"+musicInformation);
                 }
             }
@@ -48,7 +48,7 @@ public class RetrofitClient {
 
     }
 
-    public MusicInformation setMusicInformation(){
+    public MusicInformation getMusic(){
         return musicInformation;
     }
 }
