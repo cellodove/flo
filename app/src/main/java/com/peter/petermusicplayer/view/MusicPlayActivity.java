@@ -2,8 +2,11 @@ package com.peter.petermusicplayer.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.peter.petermusicplayer.R;
 import com.peter.petermusicplayer.databinding.ActivityMusicPlayBinding;
@@ -11,7 +14,7 @@ import com.peter.petermusicplayer.model.MusicPlayViewModel;
 import com.peter.petermusicplayer.model.data.MusicInformation;
 import com.peter.petermusicplayer.model.repository.Repository;
 
-public class MusicPlayActivity extends Activity {
+public class MusicPlayActivity extends AppCompatActivity {
     private ActivityMusicPlayBinding binding;
     private MusicPlayViewModel musicPlayViewModel;
 
@@ -19,8 +22,8 @@ public class MusicPlayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_music_play);
-        musicPlayViewModel = new MusicPlayViewModel();
+        musicPlayViewModel = new ViewModelProvider(this).get(MusicPlayViewModel.class);
         musicPlayViewModel.getMusicInformation();
-        System.out.println("액티비티까지 데이터가 들어와지는가 노래제목:"+musicPlayViewModel.getMusicInformation());
+        /*Log.d(Tag,"액티비티까지 데이터가 들어와지는가 노래제목:" + musicPlayViewModel.getMusicInformation());*/
     }
 }
