@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="musicPlayViewModel"
+            type="com.peter.petermusicplayer.model.MusicPlayViewModel" />
 
     </data>
 
@@ -28,6 +31,7 @@
                 android:id="@+id/musicTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{musicPlayViewModel.musicTitle}"
                 tools:text="너의 의미"
                 android:textColor="@color/music_info"/>
             <Space
@@ -38,6 +42,7 @@
                 android:id="@+id/albumName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{musicPlayViewModel.albumName}"
                 tools:text="꽃갈피"
                 android:textColor="@color/music_info"/>
         </LinearLayout>
@@ -51,6 +56,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/songImage"
             android:layout_margin="10dp"
+            android:text="@{musicPlayViewModel.signer}"
             tools:text="아이유(IU)"
             android:textColor="@color/music_info"/>
 
@@ -63,7 +69,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/lyrics"
             android:layout_margin="10dp"
+            android:background="@drawable/iu_album"
             tools:background="@drawable/iu_album"/>
+
+
 
         <TextView
             android:id="@+id/lyrics"
@@ -73,12 +82,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="10dp"
+            android:text="@{musicPlayViewModel.lyrics}"
+            android:maxLines="2"
             tools:text="너의 그 한 마디 말도 그 웃음도 \n나에겐 커다란 의미"
             android:textColor="@color/lyrics_black"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/songSeekBar"/>
+            app:layout_constraintBottom_toTopOf="@+id/exoPlayer"/>
 
-        <androidx.appcompat.widget.AppCompatSeekBar
+        <com.google.android.exoplayer2.ui.PlayerControlView
+            android:id="@+id/exoPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/lyrics"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+<!--        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/songSeekBar"
             android:layout_width="match_parent"
             android:layout_height="5dp"
@@ -108,10 +129,10 @@
             app:layout_constraintEnd_toEndOf="@+id/songSeekBar"
             android:layout_marginTop="5dp"
             tools:text="03:00"
-            android:textColor="@color/lyrics_black"/>
+            android:textColor="@color/lyrics_black"/>-->
 
 
-        <LinearLayout
+<!--        <LinearLayout
             android:id="@+id/Buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,7 +160,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_baseline_navigate_next_24"/>
-        </LinearLayout>
+        </LinearLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
