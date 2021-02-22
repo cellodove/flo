@@ -1,10 +1,6 @@
 package com.peter.petermusicplayer.model.retrofit;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import com.peter.petermusicplayer.model.data.MusicInformation;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,11 +13,9 @@ public class RetrofitClient {
     Retrofit retrofit;
 
     public RetrofitClient(){
-        initRetrofit();
     }
 
     public void initRetrofit(){
-
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -35,7 +29,7 @@ public class RetrofitClient {
                 if (response.isSuccessful()){
                     System.out.println("연결성공");
                     musicInformation = response.body();
-                    getMusic();
+                    if(null!= musicInformation) getMusic();
                     System.out.println("musicInformation 데이터가 들어가지나"+musicInformation);
                 }
             }
@@ -49,6 +43,9 @@ public class RetrofitClient {
     }
 
     public MusicInformation getMusic(){
+        System.out.println("성공한다음에 리턴하라고");
+        initRetrofit();
         return musicInformation;
+
     }
 }
