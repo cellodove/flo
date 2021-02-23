@@ -69,7 +69,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/lyrics"
             android:layout_margin="10dp"
-            android:background="@drawable/iu_album"
             tools:background="@drawable/iu_album"/>
 
 
@@ -96,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lyrics"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
 <!--        <androidx.appcompat.widget.AppCompatSeekBar
