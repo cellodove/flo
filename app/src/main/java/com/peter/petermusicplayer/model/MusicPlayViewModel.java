@@ -54,15 +54,16 @@ public class MusicPlayViewModel extends Observable {
                 System.out.println("연결성공");
                 musicInformation = response.body();
                 _mutableLiveData.setValue(response.body());
-                lyricsList = Arrays.asList(musicInformation.getLyrics().split("\n"));
 
-                System.out.println("리스트로 나오는가 "+lyricsList+"싸이즈는? "+ lyricsList.size());
-
-                /*System.out.println("musicInformation 데이터가 들어가지나"+musicInformation);*/
                 musicTitle.set(musicInformation.getTitle());
                 albumName.set(musicInformation.getAlbum());
                 signer.set(musicInformation.getSinger());
-                lyrics.set(musicInformation.getLyrics());
+
+                lyricsList = Arrays.asList(musicInformation.getLyrics().split("\n"));
+                System.out.println("리스트로 나오는가 "+lyricsList+"싸이즈는? "+ lyricsList.size());
+
+                readLyrics();
+
             }
 
             @Override
@@ -70,6 +71,11 @@ public class MusicPlayViewModel extends Observable {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void readLyrics(){
+
+        lyrics.set(musicInformation.getLyrics());
     }
 
 

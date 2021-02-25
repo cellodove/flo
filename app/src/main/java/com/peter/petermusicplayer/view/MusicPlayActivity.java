@@ -32,6 +32,7 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
     private MusicPlayViewModel musicPlayViewModel;
     private SimpleExoPlayer exoPlayer;
     private Glide glide;
+    private long playerTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +56,18 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
             MediaSource mediaSource = new ExtractorMediaSource.Factory(defaultHttpDataSourceFactory)
                     .createMediaSource(uri);
             exoPlayer.prepare(mediaSource);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("재생시간 밀리세턴트"+exoPlayer.getCurrentPosition());
+                }
+            },10);
+
+
         }} );
     }
+
 
     private void initGlide(){
         musicPlayViewModel.liveData.observe(this,musicInformation -> {
@@ -67,15 +78,6 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
         });
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
