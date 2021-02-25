@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.exoplayer2.ExoPlayer;
+import com.google.gson.Gson;
 import com.peter.petermusicplayer.model.data.MusicInformation;
 import com.peter.petermusicplayer.model.repository.Repository;
 import com.peter.petermusicplayer.model.retrofit.APIService;
@@ -17,6 +18,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,10 +63,12 @@ public class MusicPlayViewModel extends Observable {
                 signer.set(musicInformation.getSinger());
 
                 lyricsList = Arrays.asList(musicInformation.getLyrics().split("\n"));
-                System.out.println("리스트로 나오는가 "+lyricsList+"싸이즈는? "+ lyricsList.size());
+                /*System.out.println("리스트로 나오는가 "+lyricsList+"싸이즈는? "+ lyricsList.size());*/
 
+                for (int i=0; i<lyricsList.size();i++){
+                    System.out.println(i+"번째 가사 "+lyricsList.get(i));
+                }
                 readLyrics();
-
             }
 
             @Override

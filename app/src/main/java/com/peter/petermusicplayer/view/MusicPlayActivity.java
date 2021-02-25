@@ -3,6 +3,7 @@ package com.peter.petermusicplayer.view;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,13 +58,14 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
                     .createMediaSource(uri);
             exoPlayer.prepare(mediaSource);
 
-            new Handler().postDelayed(new Runnable() {
+/*            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("재생시간 밀리세턴트"+exoPlayer.getCurrentPosition());
+                    while (true){
+                        Log.d("tag", String.valueOf(exoPlayer.getCurrentPosition()));
+                    }
                 }
-            },10);
-
+            },10000);*/
 
         }} );
     }
