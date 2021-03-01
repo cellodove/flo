@@ -8,7 +8,6 @@
         <variable
             name="musicPlayViewModel"
             type="com.peter.petermusicplayer.model.MusicPlayViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,22 +70,28 @@
             android:layout_margin="10dp"
             tools:background="@drawable/iu_album"/>
 
-
-
-        <TextView
+        <ScrollView
             android:id="@+id/lyrics"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             app:layout_constraintTop_toBottomOf="@+id/songImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="10dp"
-            android:text="@{musicPlayViewModel.lyrics}"
-            android:maxLines="2"
-            tools:text="너의 그 한 마디 말도 그 웃음도 \n나에겐 커다란 의미"
-            android:textColor="@color/lyrics_black"
-            android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/exoPlayer"/>
+            app:layout_constraintBottom_toTopOf="@+id/exoPlayer">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/lyric"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="너의 그 한 마디 말도 그 웃음도"
+                    android:textColor="@color/lyrics_black"
+                    android:gravity="center"
+                    android:text="@{musicPlayViewModel.lyric}"/>
+            </LinearLayout>
+        </ScrollView>
 
         <com.google.android.exoplayer2.ui.PlayerControlView
             android:id="@+id/exoPlayer"
@@ -96,70 +101,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
-
-
-<!--        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/songSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/lyrics"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/Buttons"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:background="@color/lyrics_black"/>
-
-        <TextView
-            android:id="@+id/musicStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/songSeekBar"
-            app:layout_constraintStart_toStartOf="@+id/songSeekBar"
-            android:layout_marginTop="5dp"
-            tools:text="00:00"
-            android:textColor="@color/lyrics_black"/>
-
-        <TextView
-            android:id="@+id/musicEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/songSeekBar"
-            app:layout_constraintEnd_toEndOf="@+id/songSeekBar"
-            android:layout_marginTop="5dp"
-            tools:text="03:00"
-            android:textColor="@color/lyrics_black"/>-->
-
-
-<!--        <LinearLayout
-            android:id="@+id/Buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/songSeekBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="30dp">
-
-            <ImageView
-                android:id="@+id/playButton1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_baseline_navigate_before_24"/>
-
-            <ImageView
-                android:id="@+id/playButton2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_baseline_play_arrow_24"/>
-
-            <ImageView
-                android:id="@+id/playButton3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_baseline_navigate_next_24"/>
-        </LinearLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
