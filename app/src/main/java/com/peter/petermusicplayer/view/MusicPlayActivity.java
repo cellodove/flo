@@ -6,9 +6,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +33,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class MusicPlayActivity extends AppCompatActivity implements Observer {
 
 
@@ -38,6 +43,10 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
     private SimpleExoPlayer exoPlayer;
     private Glide glide;
     private long playerTime;
+    private Long[] lyricsTimeMillisecond;
+    private FragmentManager fragmentManager;
+    private LyricFragment lyricFragment;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +57,17 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
         setupObserver(musicPlayViewModel);
         initPlayer();
         initGlide();
+        fragmentManager = getSupportFragmentManager();
+        lyricFragment = new LyricFragment();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        /*fragmentTransaction.replace(R.id.fullLyric,lyricFragment).commitAllowingStateLoss();*/
 
-        binding.lyrics.setOnLongClickListener(new View.OnLongClickListener() {
+        binding.lyrics.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                return false;
+            public void onClick(View v) {
+                Toast.makeText(MusicPlayActivity.this,"lyric fragment", LENGTH_SHORT).show();
+                binding.fullLyric.setVisibility(View.VISIBLE);
+
             }
         });
     }
@@ -69,13 +84,7 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
             MediaSource mediaSource = new ExtractorMediaSource.Factory(defaultHttpDataSourceFactory)
                     .createMediaSource(uri);
             exoPlayer.prepare(mediaSource);
-            /*showLyric();*/
-            /*exoPlayer.addListener(new Player.EventListener() {
-                @Override
-                public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                    if (playbackState == Player.)
-                }
-            });*/
+            showLyric();
             }
         });
     }
@@ -90,24 +99,47 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
 
     }
 
-/*    private void showLyric(){
+    private void showLyric(){
         musicPlayViewModel.listLiveData.observe(this,list -> {
+            lyricsTimeMillisecond = new Long[list.size()+1];
             List<String> lyricsTime = new ArrayList<>();
             List<String> lyrics = new ArrayList<>();
+            String[] lyricsMillisecond;
+
             for (int i=0; i<list.size(); i++){
                 lyricsTime.add(list.get(i).toString().substring(1,6));
                 lyrics.add(list.get(i).toString().substring(11));
+                lyricsMillisecond = lyricsTime.get(i).split(":");
+                lyricsTimeMillisecond[i] = (Long.valueOf(lyricsMillisecond[0])*60000)+(Long.valueOf(lyricsMillisecond[1])*1000);
+                System.out.println("가사타이밍 "+lyricsTimeMillisecond[i]);
             }
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("tag", String.valueOf(exoPlayer.getCurrentPosition()));
+                    for (int i=0; i<list.size(); i++){
+                        Log.d(" getCurrentPosition()", String.valueOf(exoPlayer.getCurrentPosition()));
+                        Log.d(" lyricsTimeMillisecond", String.valueOf(lyricsTimeMillisecond[i]));
+                        try {
+                            if (lyricsTimeMillisecond[i+1]==null){
+                                lyricsTimeMillisecond[i+1]=lyricsTimeMillisecond[i]+1000;
+                                lyrics.add(i+1,"");
+                            }else {
+                                if ((lyricsTimeMillisecond[i]>=exoPlayer.getCurrentPosition())&&(exoPlayer.getCurrentPosition()<lyricsTimeMillisecond[i+1])){
+                                    binding.lyric1.setText(lyrics.get(i));
+                                    binding.lyric2.setText(lyrics.get(i+1));
+                                    break;
+                                }
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
                     handler.postDelayed(this,1000);
                 }
             },1000);
         });
-    }*/
+    }
 
     @Override
     public void update(Observable o, Object arg) {}

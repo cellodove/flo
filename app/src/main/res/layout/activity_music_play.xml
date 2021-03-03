@@ -19,12 +19,13 @@
             android:id="@+id/musicInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/signer"
-            app:layout_constraintVertical_chainStyle="packed">
+            app:layout_constraintVertical_chainStyle="packed"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/musicTitle"
@@ -32,10 +33,12 @@
                 android:layout_height="wrap_content"
                 android:text="@{musicPlayViewModel.musicTitle}"
                 tools:text="너의 의미"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:textColor="@color/music_info"/>
             <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"/>
 
             <TextView
                 android:id="@+id/albumName"
@@ -43,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{musicPlayViewModel.albumName}"
                 tools:text="꽃갈피"
+                android:textSize="15dp"
                 android:textColor="@color/music_info"/>
         </LinearLayout>
 
@@ -57,12 +61,13 @@
             android:layout_margin="10dp"
             android:text="@{musicPlayViewModel.signer}"
             tools:text="아이유(IU)"
+            android:textSize="15dp"
             android:textColor="@color/music_info"/>
 
         <ImageView
             android:id="@+id/songImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             app:layout_constraintTop_toBottomOf="@+id/signer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,34 +75,46 @@
             android:layout_margin="10dp"
             tools:background="@drawable/iu_album"/>
 
-        <ScrollView
+        <LinearLayout
             android:id="@+id/lyrics"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/songImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/exoPlayer">
-            <LinearLayout
+            <TextView
+                android:id="@+id/lyric1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/lyric"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="너의 그 한 마디 말도 그 웃음도"
-                    android:textColor="@color/lyrics_black"
-                    android:gravity="center"
-                    android:text="@{musicPlayViewModel.lyric}"/>
-            </LinearLayout>
-        </ScrollView>
+                tools:text="너의 그 한 마디 말도 그 웃음도"
+                android:textSize="15dp"
+                android:textColor="@color/music_info"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/lyric2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="너의 그 한 마디 말도 그 웃음도"
+                android:textSize="15dp"
+                android:textColor="@color/lyrics_black"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fullLyric"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/exoPlayer"/>
 
         <com.google.android.exoplayer2.ui.PlayerControlView
             android:id="@+id/exoPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/lyrics"
+            android:layout_marginBottom="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
