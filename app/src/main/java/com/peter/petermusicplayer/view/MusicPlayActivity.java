@@ -44,6 +44,7 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
     private Glide glide;
     private long playerTime;
     private Long[] lyricsTimeMillisecond;
+    private List<String> lyrics;
     private FragmentManager fragmentManager;
     private LyricFragment lyricFragment;
     private FragmentTransaction fragmentTransaction;
@@ -57,17 +58,13 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
         setupObserver(musicPlayViewModel);
         initPlayer();
         initGlide();
-        fragmentManager = getSupportFragmentManager();
-        lyricFragment = new LyricFragment();
-        lyricFragment.setArguments(getIntent().getExtras());
-        getFragmentManager().beginTransaction().add(R.id.fullLyric,lyricFragment).commit();
+
+
 
         binding.lyrics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MusicPlayActivity.this,"lyric fragment", LENGTH_SHORT).show();
                 binding.fullLyric.setVisibility(View.VISIBLE);
-
             }
         });
     }
@@ -75,6 +72,17 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
     private void initPlayer() {
         musicPlayViewModel.liveData.observe(this,musicInformation ->
         {
+            Bundle bundle = new Bundle();
+            bundle.putString("lyric", musicInformation.getLyrics());
+            bundle.putString("musicTitle",musicInformation.getTitle());
+            bundle.putString("albumName",musicInformation.getAlbum());
+            bundle.putString("signer",musicInformation.getSinger());
+            fragmentManager = getSupportFragmentManager();
+            lyricFragment = new LyricFragment();
+            lyricFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().add(R.id.fullLyric,lyricFragment).commit();
+
+
             if (exoPlayer == null){
             exoPlayer = ExoPlayerFactory.newSimpleInstance(this);
             binding.exoPlayer.setPlayer(exoPlayer);
@@ -103,7 +111,7 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
         musicPlayViewModel.listLiveData.observe(this,list -> {
             lyricsTimeMillisecond = new Long[list.size()+1];
             List<String> lyricsTime = new ArrayList<>();
-            List<String> lyrics = new ArrayList<>();
+            lyrics = new ArrayList<>();
             String[] lyricsMillisecond;
 
             for (int i=0; i<list.size(); i++){
