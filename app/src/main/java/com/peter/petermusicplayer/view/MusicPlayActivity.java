@@ -59,8 +59,8 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
         initGlide();
         fragmentManager = getSupportFragmentManager();
         lyricFragment = new LyricFragment();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        /*fragmentTransaction.replace(R.id.fullLyric,lyricFragment).commitAllowingStateLoss();*/
+        lyricFragment.setArguments(getIntent().getExtras());
+        getFragmentManager().beginTransaction().add(R.id.fullLyric,lyricFragment).commit();
 
         binding.lyrics.setOnClickListener(new View.OnClickListener() {
             @Override
