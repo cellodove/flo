@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     Context context;
     ArrayList<String> items = new ArrayList<>();
-
     public RecyclerViewAdapter(Context context){
         this.context = context;
     }
@@ -34,9 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String item = items.get(position);
         holder.setItem(item);
-
     }
-
     public void addItems(ArrayList<String> items){
         this.items = items;
     }
@@ -49,28 +46,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
-
-        AdapterView.OnItemClickListener onItemClickListener;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.recycler_lyrics);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                }
-            });
-
         }
-
         public void setItem(String item){
             textView.setText(item);
         }
     }
-
-
-
 
 }

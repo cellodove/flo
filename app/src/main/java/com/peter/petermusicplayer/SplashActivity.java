@@ -19,10 +19,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_splash);
-
         Handler handler = new Handler();
         handler.postDelayed(new splashHandler(),2000);
-
     }
 
     private class splashHandler implements Runnable{

@@ -4,36 +4,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.offline.ProgressiveDownloadAction;
-import com.google.android.exoplayer2.offline.ProgressiveDownloader;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.peter.petermusicplayer.R;
 import com.peter.petermusicplayer.databinding.ActivityMusicPlayBinding;
 import com.peter.petermusicplayer.model.MusicPlayViewModel;
-import com.peter.petermusicplayer.model.data.MusicInformation;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class MusicPlayActivity extends AppCompatActivity implements Observer {
 
@@ -116,15 +107,12 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
                 lyrics.add(list.get(i).toString().substring(11));
                 lyricsMillisecond = lyricsTime.get(i).split(":");
                 lyricsTimeMillisecond[i] = (Long.valueOf(lyricsMillisecond[0])*60000)+(Long.valueOf(lyricsMillisecond[1])*1000);
-                System.out.println("가사타이밍 "+lyricsTimeMillisecond[i]);
             }
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     for (int i=0; i<list.size(); i++){
-                        Log.d(" getCurrentPosition()", String.valueOf(exoPlayer.getCurrentPosition()));
-                        Log.d(" lyricsTimeMillisecond", String.valueOf(lyricsTimeMillisecond[i]));
                         try {
                             if (lyricsTimeMillisecond[i+1]==null){
                                 lyricsTimeMillisecond[i+1]=lyricsTimeMillisecond[i]+1000;

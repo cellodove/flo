@@ -16,7 +16,6 @@ public class RetrofitClient {
 
 
     public MusicInformation getMusic(){
-        System.out.println("성공한다음에 리턴하라고");
         return musicInformation;
     }
 

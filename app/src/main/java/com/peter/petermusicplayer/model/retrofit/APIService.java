@@ -7,7 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface APIService {
-
     @GET("2020-flo/{post}")
     Call<MusicInformation> getPost(@Path("post") String post);
 }

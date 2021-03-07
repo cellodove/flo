@@ -41,7 +41,6 @@ public class MusicPlayViewModel extends Observable {
     public List<String> lyricsList = new ArrayList<>();
 
     public MusicPlayViewModel(Context context){
-        System.out.println("뷰모델 동작하나");
         this.context = context;
         initialize();
     }
@@ -55,7 +54,6 @@ public class MusicPlayViewModel extends Observable {
         RetrofitClient.getRetrofitClient().create(APIService.class).getPost("song.json").enqueue(new Callback<MusicInformation>() {
             @Override
             public void onResponse(Call<MusicInformation> call, Response<MusicInformation> response) {
-                System.out.println("연결성공");
                 musicInformation = response.body();
                 _mutableLiveData.setValue(response.body());
                 musicTitle.set(musicInformation.getTitle());
@@ -63,7 +61,6 @@ public class MusicPlayViewModel extends Observable {
                 signer.set(musicInformation.getSinger());
                 lyricsList = Arrays.asList(musicInformation.getLyrics().split("\n"));
                 _mutableListLiveData.setValue(lyricsList);
-                System.out.println("리스크 "+ lyricsList);
             }
             @Override
             public void onFailure(Call<MusicInformation> call, Throwable t) {

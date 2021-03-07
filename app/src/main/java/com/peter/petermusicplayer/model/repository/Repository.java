@@ -25,7 +25,6 @@ public class Repository {
         RetrofitClient.getRetrofitClient().create(APIService.class).getPost("song.json").enqueue(new Callback<MusicInformation>() {
             @Override
             public void onResponse(Call<MusicInformation> call, Response<MusicInformation> response) {
-                System.out.println("연결성공");
                 MusicInformation musicInformation = response.body();
             }
             @Override
