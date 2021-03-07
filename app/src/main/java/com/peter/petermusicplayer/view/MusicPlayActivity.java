@@ -59,8 +59,6 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
         initPlayer();
         initGlide();
 
-
-
         binding.lyrics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +79,6 @@ public class MusicPlayActivity extends AppCompatActivity implements Observer {
             lyricFragment = new LyricFragment();
             lyricFragment.setArguments(bundle);
             getFragmentManager().beginTransaction().add(R.id.fullLyric,lyricFragment).commit();
-
 
             if (exoPlayer == null){
             exoPlayer = ExoPlayerFactory.newSimpleInstance(this);

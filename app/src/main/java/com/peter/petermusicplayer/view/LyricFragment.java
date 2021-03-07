@@ -10,9 +10,12 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.peter.petermusicplayer.R;
 import com.peter.petermusicplayer.databinding.FragmentFullLyricBinding;
+import com.peter.petermusicplayer.recyckerview.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,11 +27,14 @@ public class LyricFragment extends Fragment {
     private FragmentFullLyricBinding binding;
     public List<String> lyricsList = new ArrayList<>();
     private List<String> lyrics;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_full_lyric,container,false);
+        recyclerView = binding.lyricList;
         View root = binding.getRoot();
         Bundle bundle = getArguments();
         if (bundle != null){
@@ -42,16 +48,14 @@ public class LyricFragment extends Fragment {
                 lyrics.add(lyricsList.get(i).substring(11));
                 System.out.println("프래그먼트가사 "+lyrics.get(i));
             }
-            /*binding.lyricList.setText(lyrics.toString());*/
-
-            System.out.println("번들보자 "+bundle.getString("musicTitle"));
-            System.out.println("번들보자 "+bundle.getString("albumName"));
-            System.out.println("번들보자 "+bundle.getString("signer"));
-            System.out.println("번들보자 "+bundle.getString("lyric"));
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerViewAdapter = new RecyclerViewAdapter(getActivity().getApplicationContext());
+            recyclerViewAdapter.addItems((ArrayList<String>) lyrics);
+            recyclerView.setAdapter(recyclerViewAdapter);
         }else {
             System.out.println("bundel is null");
         }
-
 
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
